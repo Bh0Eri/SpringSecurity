@@ -1,28 +1,26 @@
 package com.security.controller;
 
 import com.security.dto.UserDtoRequest;
-import com.security.entities.User;
+import com.security.entities.UserEntity;
 import com.security.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/uus")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 @RestController
 public class UserController {
     private final UserService userService;
 
     @GetMapping("/show")
-    public User findByEmail(@RequestParam String email) {
+    public UserEntity findByEmail(@RequestParam String email) {
         return userService.findByEmail(email);
     }
 
     @PostMapping("/create")
-    public String createUser(@RequestBody UserDtoRequest user) {
-        userService.createUser(user);
-
-        return "sucess, 200";
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserDtoRequest user) {
+        return ResponseEntity.status(201).body(userService.createUser(user));
     }
 
 }

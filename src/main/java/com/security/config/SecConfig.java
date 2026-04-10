@@ -2,6 +2,7 @@ package com.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,15 +17,14 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecConfig {
 
     @Bean
-    public SecurityFilterChain FilterChain(HttpSecurity http) throws Exception {
-
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/uus").permitAll()
-                                .requestMatchers("/admin").hasRole("ADMIN")
-                                .anyRequest().authenticated()
-                        )
+                        .requestMatchers("/users").permitAll()
+                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
                 .httpBasic(withDefaults());
         return http.build();
     }

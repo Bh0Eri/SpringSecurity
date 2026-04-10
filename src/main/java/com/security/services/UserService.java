@@ -1,7 +1,7 @@
 package com.security.services;
 
 import com.security.dto.UserDtoRequest;
-import com.security.entities.User;
+import com.security.entities.UserEntity;
 import com.security.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,12 +14,12 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public User findByEmail(String email) {
+    public UserEntity findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public User createUser(UserDtoRequest userDtoRequest) {
-        User user = new User();
+    public UserEntity createUser(UserDtoRequest userDtoRequest) {
+        UserEntity user = new UserEntity();
 
         user.setName(userDtoRequest.getName());
         user.setEmail(userDtoRequest.getEmail());
