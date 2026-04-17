@@ -1,0 +1,2 @@
+INSERT INTO user  (email, password)
+VALUES('manuela', 1245),('eric','otario'),('bla',123456);
